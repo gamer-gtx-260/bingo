@@ -236,7 +236,7 @@
 
         function generate() {
             document.getElementById("playcircle").setAttribute("style", "display:none;");
-            document.getElementById("reload").removeAttribute("style");
+            // document.getElementById("reload").removeAttribute("style");
             let table = document.querySelector('#table');
             table.innerHTML = "";
             let k = 1;
@@ -534,7 +534,7 @@
                     case 4:
                         document.getElementById("BINGO").innerHTML = "<p><s style='color:red'>BING</s>O</p>";
                         document.getElementById("BINGOCOUNT").innerHTML = "Only " + (5 - Number(localStorage.getItem("wincount"))) + " left!!! Hurry!!";
-                        document.getElementById("myDiv").setAttribute("style", "animation: shake 1s alternate;")
+                        // document.getElementById("myDiv").setAttribute("style", "animation: shake 1s alternate;")
                         break;
                     case 5:
                         document.getElementById("BINGO").innerHTML = "<p><s style='color:red'>BINGO</s></p>";
