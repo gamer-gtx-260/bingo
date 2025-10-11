@@ -227,7 +227,13 @@
             document.getElementById('table').addEventListener('click', e => {
                 let tr = e.target.closest('tr');
                 let td = e.target.closest('td');
+                for (const x of map.entries()) {
+                    if (x[1] == tr.rowIndex + "" + td.cellIndex) {
+                        map.delete(x[0]);
+                    }
+                }
                 map.set(counter++, tr.rowIndex + "" + td.cellIndex);
+                console.log(map);
                 let values = map.entries();
                 x0count = 0;
                 x1count = 0;
@@ -491,7 +497,12 @@
                 }
 
                 if (td) {
+                    // if (td.getAttribute("style").includes("background-repeat: no-repeat;")) {
+                    //     td.setAttribute("style", "padding:15px; background-color:white; font-size:5em; border:5px solid blue; background:none;");
+                    //     map.delete(tr.rowIndex)
+                    // } else {
                     td.setAttribute("style", `padding:15px; font-size:5em; font-weight: bolder; text-align: justify; border:5px solid purple; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("cross.png");`);
+                    // }
                 }
             });
 
