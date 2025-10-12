@@ -9,57 +9,6 @@
 
 <body>
     <style>
-        #myDiv {
-            /* animation: shake 0.5s; */
-            animation-iteration-count: 1;
-        }
-
-        @keyframes shake {
-            0% {
-                transform: translate(1px, 1px) rotate(0deg);
-            }
-
-            10% {
-                transform: translate(-1px, -2px) rotate(-1deg);
-            }
-
-            20% {
-                transform: translate(-3px, 0px) rotate(1deg);
-            }
-
-            30% {
-                transform: translate(3px, 2px) rotate(0deg);
-            }
-
-            40% {
-                transform: translate(1px, -1px) rotate(1deg);
-            }
-
-            50% {
-                transform: translate(-1px, 2px) rotate(-1deg);
-            }
-
-            60% {
-                transform: translate(-3px, 1px) rotate(0deg);
-            }
-
-            70% {
-                transform: translate(3px, 1px) rotate(-1deg);
-            }
-
-            80% {
-                transform: translate(-1px, -1px) rotate(1deg);
-            }
-
-            90% {
-                transform: translate(1px, 2px) rotate(0deg);
-            }
-
-            100% {
-                transform: translate(1px, -2px) rotate(-1deg);
-            }
-        }
-
         .confetti {
             justify-content: center;
             align-items: center;
@@ -236,19 +185,15 @@
 
         function generate() {
             document.getElementById("playcircle").setAttribute("style", "display:none;");
-            // document.getElementById("reload").removeAttribute("style");
             let table = document.querySelector('#table');
             table.innerHTML = "";
             let k = 1;
             var colours = "pink,orange,yellow,green,cyan,aqua,dodgerblue,aquamarine,floralwhite".split(",");
             document.body.style.backgroundColor = colours[Math.floor(Math.random() * colours.length)];
-            // document.getElementById("generate").setAttribute('disabled', 'disabled');
             document.getElementById("STARTGAME").innerHTML = "";
             document.getElementById("RULES").innerHTML = "";
 
             var ranNums = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
-
-
 
             for (let i = 0; i < 5; i++) {
                 let tr = document.createElement('tr');
@@ -282,7 +227,13 @@
             document.getElementById('table').addEventListener('click', e => {
                 let tr = e.target.closest('tr');
                 let td = e.target.closest('td');
+                for (const x of map.entries()) {
+                    if (x[1] == tr.rowIndex + "" + td.cellIndex) {
+                        map.delete(x[0]);
+                    }
+                }
                 map.set(counter++, tr.rowIndex + "" + td.cellIndex);
+                console.log(map);
                 let values = map.entries();
                 x0count = 0;
                 x1count = 0;
@@ -369,10 +320,8 @@
                             }
                             break;
                         case "22":
-                            // if (!localStorage.getItem("wincounter").includes("z0count")) {
                             z0count = z0count + 1;
                             z1count = z1count + 1;
-                            // }
                             break;
                         case "33":
                             if (!localStorage.getItem("wincounter").includes("z0count")) {
@@ -534,7 +483,6 @@
                     case 4:
                         document.getElementById("BINGO").innerHTML = "<p><s style='color:red'>BING</s>O</p>";
                         document.getElementById("BINGOCOUNT").innerHTML = "Only " + (5 - Number(localStorage.getItem("wincount"))) + " left!!! Hurry!!";
-                        // document.getElementById("myDiv").setAttribute("style", "animation: shake 1s alternate;")
                         break;
                     case 5:
                         document.getElementById("BINGO").innerHTML = "<p><s style='color:red'>BINGO</s></p>";
@@ -542,19 +490,20 @@
                         break;
                 }
 
-
-                document.getElementById("BINGO").setAttribute("style", "font-size: 500%;");
-                if (Number(localStorage.getItem("wincount")) == 5) {
-                    alert("You are the winner!!! BINGO");
-                }
-
                 if (td) {
                     // if (td.getAttribute("style").includes("background-repeat: no-repeat;")) {
                     //     td.setAttribute("style", "padding:15px; background-color:white; font-size:5em; border:5px solid blue; background:none;");
                     //     map.delete(tr.rowIndex)
                     // } else {
-                    td.setAttribute("style", `padding:15px; font-size:5em; font-weight: bolder; text-align: justify; border:5px solid purple; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("cross.png");`);
+                    td.setAttribute("style", `padding:15px; font-size:5em; font-weight: bolder; text-align: justify; border:5px solid purple; background-color:white; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("cross.png");`);
                     // }
+                }
+
+                document.getElementById("BINGO").setAttribute("style", "font-size: 500%;");
+                if (Number(localStorage.getItem("wincount")) == 5) {
+                    setTimeout(() => {
+                        alert("You are the winner!!! BINGO");
+                    }, 200);
                 }
             });
 
