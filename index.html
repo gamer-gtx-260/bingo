@@ -490,19 +490,20 @@
                         break;
                 }
 
-
-                document.getElementById("BINGO").setAttribute("style", "font-size: 500%;");
-                if (Number(localStorage.getItem("wincount")) == 5) {
-                    alert("You are the winner!!! BINGO");
-                }
-
                 if (td) {
                     // if (td.getAttribute("style").includes("background-repeat: no-repeat;")) {
                     //     td.setAttribute("style", "padding:15px; background-color:white; font-size:5em; border:5px solid blue; background:none;");
                     //     map.delete(tr.rowIndex)
                     // } else {
-                    td.setAttribute("style", `padding:15px; font-size:5em; font-weight: bolder; text-align: justify; border:5px solid purple; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("cross.png");`);
+                    td.setAttribute("style", `padding:15px; font-size:5em; font-weight: bolder; text-align: justify; border:5px solid purple; background-color:white; background-repeat: no-repeat; background-position: center; background-size: contain; background-image: url("cross.png");`);
                     // }
+                }
+
+                document.getElementById("BINGO").setAttribute("style", "font-size: 500%;");
+                if (Number(localStorage.getItem("wincount")) == 5) {
+                    setTimeout(() => {
+                        alert("You are the winner!!! BINGO");
+                    }, 200);
                 }
             });
 
