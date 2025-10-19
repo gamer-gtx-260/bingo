@@ -172,6 +172,15 @@
         }
     </style>
     <script>
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("setColour").addEventListener("change", watchColorPicker);
+});
+
+function watchColorPicker(event) {
+  console.log("test");
+}
+        
         function* shuffle(array) {
             var i = array.length;
             while (i--) {
@@ -183,13 +192,24 @@
             window.location.reload();
         }
 
+        function setColour() {
+        document.body.style.backgroundColor = document.getElementById("setColour").value;
+         var ev = document.createEvent('KeyboardEvent');
+    ev.initKeyEvent(
+        'keydown', true, true, window, false, false, false, false, 27, 0);
+    document.body.dispatchEvent(ev);gi
+        }
+
         function generate() {
             document.getElementById("playcircle").setAttribute("style", "display:none;");
+            document.getElementById("setColour").setAttribute("style", "display:none");
+                        document.getElementById("setColourButton").setAttribute("style", "display:none");
+
             let table = document.querySelector('#table');
             table.innerHTML = "";
             let k = 1;
             var colours = "chartreuse,pink,orange,yellow,green,cyan,aqua,dodgerblue,aquamarine,floralwhite,black,purple,gold,violet".split(",");
-            document.body.style.backgroundColor = colours[Math.floor(Math.random() * colours.length)];
+            //document.body.style.backgroundColor = colours[Math.floor(Math.random() * colours.length)];
             document.getElementById("STARTGAME").innerHTML = "";
             document.getElementById("RULES").innerHTML = "";
 
@@ -517,6 +537,12 @@
                     <button id="generate" type="button" class="btn" onclick="generate()">
                         <i id="playcircle" class="bi bi-play-circle h1"></i>
                         <i id="reload" class="bi bi-arrow-clockwise h1" style="display: none;"></i>
+                    </button>
+                </div>
+                <div class="col">
+                    <input type="color" id="setColour" name="favcolor" value="#ff0000">
+                    <button id="setColourButton" type="button" class="btn" onclick="setColour()">
+                        <i class="bi bi-check h1"></i>
                     </button>
                 </div>
                 <div class="col">
